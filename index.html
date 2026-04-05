@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proper Monitor v3.0 | Gas & Flame Detection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-layout">
+        <!-- Sidebar Navigation & Info -->
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="logo">🛡️</div>
+                <h1>Guardian AI</h1>
+            </div>
+
+            <nav class="system-status-panel">
+                <div class="panel-header">System Health</div>
+                
+                <!-- Alarm Control -->
+                <div class="status-item alarm-control" id="alarm-panel">
+                    <div class="status-icon">🔔</div>
+                    <div class="status-info">
+                        <label>Audible Alarm</label>
+                        <div class="alarm-switch-wrapper">
+                            <span class="alarm-status-text" id="alarm-toggle-text">OFF</span>
+                            <label class="switch">
+                                <input type="checkbox" id="alarm-toggle">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="status-item" id="server-status">
+
+                    <div class="status-icon">🔌</div>
+                    <div class="status-info">
+                        <label>Websocket Server</label>
+                        <span class="status-text">Connecting...</span>
+                    </div>
+                </div>
+
+                <div class="status-item" id="hardware-status">
+                    <div class="status-icon">🤖</div>
+                    <div class="status-info">
+                        <label>ESP32 Hardware</label>
+                        <span class="status-text">Disconnected</span>
+                    </div>
+                </div>
+
+            </nav>
+
+                <div class="sidebar-footer">
+                    <button id="simulate-btn" class="action-btn secondary">Simulate Test Hazard</button>
+                </div>
+
+
+
+        </aside>
+
+        <!-- Main Dashboard View -->
+        <main class="main-content">
+            <header class="view-header">
+                <div class="header-titles">
+                    <h2></h2>
+                    <p>REAL-TIME GAS CONCENTRATION AND FIRE DETECTION MONITORING SYSTEM..</p>
+                </div>
+                <div class="live-clock" id="live-clock">00:00:00</div>
+            </header>
+
+            <section class="dashboard-core">
+                <!-- HERO CARD: Gas Reading -->
+                <div class="hero-card" id="gas-hero">
+                    <div class="card-header-v3">
+                        <h3>Toxic Gas Concentration</h3>
+                        <div class="badge" id="gas-badge">Idle</div>
+                    </div>
+                    
+                    <div class="gauge-focus">
+                        <div class="gauge-v3">
+                            <svg viewBox="0 0 100 50">
+                                <path class="gauge-track" d="M 10 50 A 40 40 0 0 1 90 50" fill="none"></path>
+                                <path class="gauge-progress" id="gas-gauge" d="M 10 50 A 40 40 0 0 1 90 50" fill="none" stroke-dasharray="125.6" stroke-dashoffset="125.6"></path>
+                            </svg>
+                            <div class="gauge-reading">
+                                <span id="gas-value">0</span>
+                                <small>PPM</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="sensor-meta">
+                        <div class="meta-item">
+                            <span class="dot normal"></span>
+                            <span id="gas-status">Operational</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECONDARY CARD: Flame & Status -->
+                <div class="side-panel-v3">
+                    <div class="flame-card-v3" id="flame-card">
+                        <div class="flame-header">
+                            <h3>Flame Sentinel</h3>
+                        </div>
+                        <div class="flame-visual">
+                            <div class="flame-icon-v3" id="flame-indicator">🔥</div>
+                        </div>
+                        <div class="flame-status-text" id="flame-status">Scanning...</div>
+                    </div>
+
+                    <div class="event-log-v3">
+                        <div class="log-header">Recent Incidents</div>
+                        <ul id="alert-log" class="incidents-list">
+                            <li class="incident-item info">System initialized. Awaiting hardware link...</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <audio id="alarm-siren" loop translate="no">
+        <source src="alarm.mp3.mp3" type="audio/mpeg">
+    </audio>
+
+
+
+    <!-- Socket.io -->
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
